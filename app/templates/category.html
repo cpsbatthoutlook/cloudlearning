@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bookmarks - {{ category.name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Bookmarks - {{ category.name }}</h1>
+    <p><a href="{{ url_for('index') }}">Back to All Bookmarks</a> | <a href="{{ url_for('add_bookmark') }}">Add New Bookmark</a></p>
+
+    <h2>Bookmarks in {{ category.name }}</h2>
+    {% if bookmarks %}
+    <ul>
+        {% for bookmark in bookmarks %}
+        <li>
+            <a href="{{ bookmark.url }}" target="_blank">{{ bookmark.title }}</a>
+            <a href="{{ url_for('modify_bookmark', bookmark_id=bookmark.id) }}">Modify</a>
+            <a href="{{ url_for('remove_bookmark', bookmark_id=bookmark.id) }}" onclick="return confirm('Are you sure you want to remove this bookmark?')">Remove</a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No bookmarks in this category yet.</p>
+    {% endif %}
+</body>
+</html>
+
