@@ -1,0 +1,263 @@
+/* static/style.css */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f4f7f6;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+}
+
+.container {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    max-width: 900px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+h1, h2 {
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.card {
+    background-color: #ecf0f1;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+label {
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="url"],
+textarea,
+select {
+    padding: 12px;
+    border: 1px solid #bdc3c7;
+    border-radius: 6px;
+    font-size: 1em;
+    width: calc(100% - 24px); /* Account for padding */
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="url"]:focus,
+textarea:focus,
+select:focus {
+    border-color: #3498db;
+    outline: none;
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+}
+
+button[type="submit"],
+.button {
+    background-color: #3498db;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-decoration: none; /* For anchor tags acting as buttons */
+    display: inline-block;
+    text-align: center;
+}
+
+button[type="submit"]:hover,
+.button:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+}
+
+.button.edit-button {
+    background-color: #27ae60;
+    margin-right: 10px;
+}
+
+.button.edit-button:hover {
+    background-color: #229954;
+}
+
+.button.delete-button {
+    background-color: #e74c3c;
+}
+
+.button.delete-button:hover {
+    background-color: #c0392b;
+}
+
+.button.back-button {
+    background-color: #95a5a6;
+    margin-left: 10px;
+}
+
+.button.back-button:hover {
+    background-color: #7f8c8d;
+}
+
+
+.filter-section {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.filter-section select {
+    width: auto;
+    min-width: 200px;
+    padding: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #ecf0f1;
+    border-radius: 8px;
+    overflow: hidden; /* Ensures rounded corners apply to content */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #bdc3c7;
+}
+
+th {
+    background-color: #34495e;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.9em;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+tbody tr:hover {
+    background-color: #ddebf0;
+}
+
+td a {
+    color: #3498db;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+td a:hover {
+    text-decoration: underline;
+}
+
+.actions {
+    white-space: nowrap; /* Keep buttons on one line */
+}
+
+.no-bookmarks {
+    text-align: center;
+    font-style: italic;
+    color: #777;
+    margin-top: 40px;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+
+    thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    tr {
+        margin-bottom: 15px;
+        border: 1px solid #bdc3c7;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    td {
+        border: none;
+        position: relative;
+        padding-left: 50%;
+        text-align: right;
+    }
+
+    td:before {
+        content: attr(data-label);
+        position: absolute;
+        left: 10px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        text-align: left;
+        font-weight: bold;
+        color: #34495e;
+    }
+
+    td:nth-of-type(1):before { content: "Title:"; }
+    td:nth-of-type(2):before { content: "Category:"; }
+    td:nth-of-type(3):before { content: "Description:"; }
+    td:nth-of-type(4):before { content: "Actions:"; }
+
+    .actions {
+        text-align: left;
+        padding-left: 10px;
+    }
+
+    .actions .button {
+        margin-right: 5px;
+        margin-bottom: 5px;
+        display: inline-block;
+    }
+
+    .add-bookmark-form, .edit-bookmark-form {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 15px;
+    }
+    input[type="text"],
+    input[type="url"],
+    textarea,
+    select {
+        width: calc(100% - 20px); /* Adjust padding for smaller screens */
+        padding: 10px;
+    }
+    button[type="submit"],
+    .button {
+        padding: 10px 15px;
+        font-size: 1em;
+    }
+}
