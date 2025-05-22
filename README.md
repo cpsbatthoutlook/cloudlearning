@@ -12,7 +12,7 @@ sudo yum remove -y docker \
               docker-latest \
               docker-latest-engine \
               docker-engine
-sudo yum install -y yum-utils device-mapper-persistent-data lvm2 tmux sqlite3 python3-venv
+sudo yum install -y yum-utils device-mapper-persistent-data lvm2 tmux sqlite3 python3-venv git
 sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 sudo yum-config-manager --enable docker-ce-stable
 yum list docker-ce --showduplicates | sort -r
@@ -24,7 +24,7 @@ sudo systemctl enable docker
 #### Ubuntu
 
 apt -y update
-apt install -y apt-transport-https ca-certificates curl gnupg lsb-release curl tmux  sqlite3 python3-venv
+apt install -y apt-transport-https ca-certificates curl gnupg lsb-release curl tmux  sqlite3 python3-venv git 
 sudo mkdir -p /etc/apt/keyrings	
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 echo   "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
