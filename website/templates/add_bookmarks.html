@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Bookmark</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Add New Bookmark</h1>
+        <div class="card add-bookmark-form">
+            <form method="POST" action="{{ url_for('add_bookmark') }}">
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" value="{{ title if title }}" required>
+
+                <label for="url">URL:</label>
+                <input type="url" id="url" name="url" placeholder="https://example.com" value="{{ url if url }}" required>
+
+                <label for="category">Category:</label>
+                <select id="category" name="category" required>
+                    <option value="" disabled {% if not category %}selected{% endif %}>Select Category</option>
+                    {% for cat in categories %}
+                        <option value="{{ cat }}" {% if category == cat %}selected{% endif %}>{{ cat }}</option>
+                    {% endfor %}
+                    <option value="new_category">-- Add New Category --</option>
+                </select>
+                <input type="text" id="new_category_input" name="new_category" style="display: none;" placeholder="New Category">
+
+                <label for="description">Description (Optional):</label>
+                <textarea id="description" name="description" rows="3">{{ description if description }}</textarea>
+
+                <button type="submit">Add Bookmark</button>
+                <a href="{{ url_for('index') }}" class="button back-button">Cancel</a>
+            </form>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const categorySelect = document.getElementById('category');
+            const newCategoryInput = document.getElementById('new_category_input');
+
+            categorySelect.addEventListener('change', function() {
+                if (this.value === 'new_category') {
+                    newCategoryInput.style.display = 'block';
+                    newCategoryInput.setAttribute('name', 'category'); // Use the same name for new input
+                    this.removeAttribute('name'); // Remove name from select to avoid empty submission
+                    this.value = ''; // Reset the select value
+                } else {
+                    newCategoryInput.style.display = 'none';
+                    newCategoryInput.removeAttribute('name');
+                    this.setAttribute('name', 'category'); // Restore name to select
+                }
+            });
+        });
+    </script>
+</body>
+</html>
