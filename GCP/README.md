@@ -37,6 +37,6 @@ alias gciamsa='gcloud iam service-accounts '
 export PR=\$(gcloud config get-value project)
 EOF
 
-sudo docker run -it --rm --name gcloud -v `pwd`:/git:z  gcr.io/google.com/cloudsdktool/google-cloud-cli:latest bash
+cd ~/git && sudo docker run -it --rm --name gcloud -v `pwd`:/git:z  gcr.io/google.com/cloudsdktool/google-cloud-cli:latest bash
 
 
