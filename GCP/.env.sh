@@ -1,12 +1,19 @@
+echo apt install -y vim
 alias gc=gcloud
 alias gcs='gcloud storage '
+alias gccc='gcloud config configurations '
 alias gcc='gcloud compute '
+alias gcpaiampb='gcloud projects add-iam-policy-binding '
+alias gcpgiamp='gcloud projects get-iam-policy '
 alias gcci='gcloud compute instances '
 alias gciam='gcloud iam '
 alias gciamr='gcloud iam roles '
 alias gciamsa='gcloud iam service-accounts '
 export PR=$(gcloud config get-value project)
-export region=$(gcloud config get-value compute/region)
 export zone=$(gcloud config get-value compute/zone)
-echo apt install -y vim
-echo $region  $zone  $PR
+export region=$(gcloud config get-value compute/region)
+###
+alias tf='terraform '
+alias tfplan='terraform plan '
+alias tfapply='terraform apply -auto-approve '
+alias tfshow='terraform show '
