@@ -1,5 +1,6 @@
 echo apt install -y vim
 alias gc=gcloud
+alias gcaappdeflogin='gcloud auth application-default login' ## /root/.config/gcloud/application_default_credentials.json  
 alias gcs='gcloud storage '
 alias gccc='gcloud config configurations '
 alias gcc='gcloud compute '
