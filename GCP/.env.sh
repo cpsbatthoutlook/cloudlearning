@@ -18,3 +18,5 @@ alias tf='terraform '
 alias tfplan='terraform plan '
 alias tfapply='terraform apply -auto-approve '
 alias tfshow='terraform show '
+# Function
+function cpscleanup() { egrep -v "^\s*$|^\s*#" $1; }
