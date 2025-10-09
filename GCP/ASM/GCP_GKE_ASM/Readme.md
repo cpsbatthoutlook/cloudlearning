@@ -11,12 +11,15 @@ gc config set project
 
 
 export PROJECT_ID=$(gcloud config get-value project)
+export PR=$(gcloud config get-value project)
 export PROJECT_NUMBER=$(gcloud projects describe ${PROJECT_ID} \
     --format="value(projectNumber)")
 export CLUSTER_NAME=central
 export CLUSTER_ZONE=us-east1-c
 export WORKLOAD_POOL=${PROJECT_ID}.svc.id.goog
 export MESH_ID="proj-${PROJECT_NUMBER}"
+#
+alias kc='kubectl '
 
 
 gcloud projects get-iam-policy $PROJECT_ID \
@@ -31,19 +34,13 @@ done
 
 gcloud config set compute/zone ${CLUSTER_ZONE}
 gcloud container clusters create ${CLUSTER_NAME} \
-    --machine-type=e2-standard-4 \
-    --num-nodes=4 \
-    --subnetwork=default \
-    --release-channel=regular \
-    --labels mesh_id=${MESH_ID} \
-    --workload-pool=${WORKLOAD_POOL} \
-    --logging=SYSTEM,WORKLOAD
+ --machine-type=e2-standard-4  --num-nodes=3 --subnetwork=default \
+ --release-channel=regular --labels mesh_id=${MESH_ID} --workload-pool=${WORKLOAD_POOL} --logging=SYSTEM,WORKLOAD
 
 
 
 
 gc config set compute/zone 
-alias kc='kubectl '
 kc create clusterrolebinding cluster-admin-binding   --clusterrole=cluster-admin   --user=$(whoami)@qwiklabs.net 
 gc container clusters get-credentials $CLUSTER_NAME --zone $CLUSTER_ZONE  --project $PR
 
@@ -86,7 +83,6 @@ cd ~/asm_output
 kc apply -n $GATEWAY_NS \
   -f samples/gateways/istio-ingressgateway
 
-
 kc label namespace default istio-injection-istio.io/rev=$REVISION --overwrite
 
 ### Deploy Bookinfo 
@@ -112,11 +108,15 @@ kc exec -it $(kubectl get pod -l app=ratings \
 
 kc get gateway
 kc get svc istio-ingressgateway -n istio-system
-export GATEWAY_URL=34.26.69.251
+export GATEWAY_URL=34.26
 curl -I http://${GATEWAY_URL}/productpage
 
 
 ### Use the Bookinfo app
+sudo apt install siege
+siege http://${GATEWAY_URL}/productpage
+
+
 ### Monitor service performance with the Cloud Service Mesh 
 ### Dashboard
 
